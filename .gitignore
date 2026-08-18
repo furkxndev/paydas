@@ -1,0 +1,23 @@
+# bağımlılıklar
+node_modules/
+
+# derleme çıktıları
+dist/
+build/
+web-build/
+.expo/
+
+# ortam değişkenleri — asla depoya girmemeli
+.env
+.env.local
+.env.*.local
+
+# native klasörleri (prebuild çıktısı)
+frontend/ios/
+frontend/android/
+
+# yerel araç çıktıları
+*.log
+.DS_Store
+coverage/
+expo-qr.html

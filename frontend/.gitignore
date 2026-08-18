@@ -1,0 +1,14 @@
+node_modules/
+.expo/
+dist/
+web-build/
+*.log
+.DS_Store
+
+# ortam değişkenleri
+.env
+.env.local
+
+# native klasörleri (prebuild çıktısı)
+/ios
+/android

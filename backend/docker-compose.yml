@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: paydas-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:-paydas}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD tanımlanmalı (.env)}
+      POSTGRES_DB: ${DB_NAME:-paydas}
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    volumes:
+      - paydas-postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USERNAME:-paydas} -d ${DB_NAME:-paydas}']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build: .
+    container_name: paydas-api
+    restart: unless-stopped
+    # Yalnızca "docker compose --profile full up" ile ayağa kalkar;
+    # geliştirmede API'yi doğrudan npm run start:dev ile çalıştırmak daha pratiktir.
+    profiles: ['full']
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      # Konteyner içinden veritabanına servis adıyla ve dahili port üzerinden erişilir.
+      # DB_PORT ana makinedeki yayın portudur; konteyner ağında her zaman 5432'dir.
+      DB_HOST: postgres
+      DB_PORT: 5432
+    env_file:
+      - .env
+    ports:
+      - '${PORT:-3000}:3000'
+
+volumes:
+  paydas-postgres-data:
