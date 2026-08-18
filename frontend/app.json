@@ -7,11 +7,21 @@
     "icon": "./assets/icon.png",
     "scheme": "paydas",
     "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#5B5BD6"
+    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.paydas.app",
       "infoPlist": {
         "CFBundleAllowMixedLocalizations": true
+      },
+      "splash": {
+        "image": "./assets/splash-icon.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#5B5BD6"
       }
     },
     "android": {
@@ -26,7 +36,12 @@
       "permissions": [
         "POST_NOTIFICATIONS",
         "SCHEDULE_EXACT_ALARM"
-      ]
+      ],
+      "splash": {
+        "image": "./assets/splash-icon.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#5B5BD6"
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
